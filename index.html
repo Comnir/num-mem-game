@@ -1,0 +1,25 @@
+<!doctype html>
+<html ng-app="myApp">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="memNum.js"></script>
+    <link rel="stylesheet" href="todo.css">
+  </head>
+  <body>
+    <h2>Numbers Memory Game</h2>
+    <div ng-controller="MemNumController as memNum">
+		<label>Number:</label> 
+		<div ng-show="memNum.showNum">{{memNum.numText}}</div>
+		<button ng-click="memNum.selectNextNum(5)" class="btn-primart">Next Num</button>
+		<button ng-click="memNum.hideCurNum()" class="btn-primart">Hide Num</button>
+		
+        <br />
+        <input type="text" ng-model="memNum.guessedNum"  size="30">
+        <button ng-click="memNum.checkGuess()" class="btn-primart">Check guess</button>
+        <br />
+        <label>Correct:</label><span>{{memNum.correctAnswers}}</span> <label>Wrong:</label>{{memNum.wrongAnswers}}
+        
+    </div>
+  </body>
+</html>
