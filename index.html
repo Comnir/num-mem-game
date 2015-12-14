@@ -11,15 +11,45 @@
     <div ng-controller="MemNumController as memNum">
 		<label>Number:</label> 
 		<div ng-show="memNum.showNum">{{memNum.numText}}</div>
-		<button ng-click="memNum.selectNextNum(5)" class="btn-primart">Next Num</button>
-		<button ng-click="memNum.hideCurNum()" class="btn-primart">Hide Num</button>
-		
-        <br />
-        <input type="text" ng-model="memNum.guessedNum"  size="30">
-        <button ng-click="memNum.checkGuess()" class="btn-primart">Check guess</button>
-        <br />
-        <label>Correct:</label><span>{{memNum.correctAnswers}}</span> <label>Wrong:</label>{{memNum.wrongAnswers}}
-        
+		<button ng-click="memNum.endGame()" class="btn-primary">End game</button>
+            
+        <div class="animate-switch-container" ng-switch on="memNum.stage">
+		    <div class="animate-switch" ng-switch-when="intro">
+                The aim of this game is to test your number memorization capabilities.<br/>
+                You need to enter the number that was displayed.<br/>
+                Good luck!
+                
+		        <button ng-click="memNum.selectNextNum(5)" class="btn-primary">Start</button>
+            </div>
+		    <div class="animate-switch" ng-switch-when="displayNumber">
+                {{memNum.num}}
+            </div>
+		    <div class="animate-switch" ng-switch-when="waitForInput">
+                Enter the number: 
+                <input type="text" ng-model="memNum.inputNum"  size="30">
+                <button ng-click="memNum.showResult()" class="btn-primary">Check</button>
+            </div>
+		    <div class="animate-switch" ng-switch-when="showResultCorrect">
+                Correct!<br/>
+                Displayed number: {{memNum.num}}<br/>
+                <br/>
+                <button ng-click="memNum.selectNextNum()" class="btn-primary">Continue</button>
+            </div>
+		    <div class="animate-switch" ng-switch-when="showResultWrong">
+                Wrong...<br/>
+                Displayed number: {{memNum.num}}<br/>
+                Your input: {{memNum.inputNum}}
+                <br/>
+                <button ng-click="memNum.selectNextNum()" class="btn-primary">Continue</button>
+            </div>
+		    <div class="animate-switch" ng-switch-when="summary">
+                <label>Correct answers:</label>{{memNum.correctAnswers}}
+                <br />
+                <label>Wrong answers:</label>{{memNum.wrongAnswers}}
+            </div>
+		    <div class="animate-switch" ng-switch-default>Error: showing default....</div>
+		</div>
+        </div>
     </div>
   </body>
 </html>

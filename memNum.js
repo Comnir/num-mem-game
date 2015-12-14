@@ -1,36 +1,45 @@
 angular.module('myApp')
   .controller('MemNumController', function($scope, $interval) {
     var memNum = this;
+    
+    memNum.stage = 'intro';
+    
     memNum.correctAnswers = 0;
     memNum.wrongAnswers = 0;
+    memNum.numLen = 1; // number length
     var time = 5000
 	var countdown; // holds promise returned by interval
 	
-	memNum.hideCurNum = function () {
-		//memNum.numText = ''
-		memNum.showNum = false
-	}
-	
-    memNum.selectNextNum = function (length) {
+    memNum.selectNextNum = function () {
 		cancelCountdown();
-		var tmp = Math.floor(Math.random() * 10)
-		if (tmp == 0)
-		  tmp = '5'
-		for (var i=0; i<length; i++)
-		  tmp += Math.floor(Math.random() * 10)
-		memNum.numText = tmp
-		memNum.num = memNum.numText
-		memNum.showNum = true
-		countdown =  $interval(memNum.hideCurNum, time, 1);
+		memNum.inputNum = '';
+		var tmp = (Math.floor(Math.random() * 9) + 1).toString(); // [1..9]
+		for (var i=0; i<memNum.numLen; i++)
+		  tmp += Math.floor(Math.random() * 10); // [0..9]
+		memNum.num = tmp;
+		
+		memNum.stage = 'displayNumber';
+		countdown =  $interval(memNum.waitForInput, time, 1);
 	}
 	
-	memNum.checkGuess = function () {
-		if (memNum.guessedNum == memNum.num) 
+	memNum.waitForInput = function () {
+		memNum.stage = 'waitForInput';
+	}
+	
+	memNum.showResult = function () {
+		if (memNum.inputNum == memNum.num) {
 		  memNum.correctAnswers++;
-		else
+		  memNum.stage = 'showResultCorrect';
+	    }
+		else {
 		  memNum.wrongAnswers++;
-	    
-		memNum.guessedNum = "";
+		  memNum.stage = 'showResultWrong';
+	    }
+	}
+	
+	memNum.endGame = function () {
+		cancelCountdown();
+		memNum.stage = 'summary';
 	}
     
     $scope.$on('$destroy', function() {
@@ -44,5 +53,4 @@ angular.module('myApp')
             countdown = undefined;
         }
 	}
-    
   });
