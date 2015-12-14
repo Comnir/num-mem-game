@@ -14,7 +14,7 @@ angular.module('myApp')
 		cancelCountdown();
 		memNum.inputNum = '';
 		var tmp = (Math.floor(Math.random() * 9) + 1).toString(); // [1..9]
-		for (var i=0; i<memNum.numLen; i++)
+		for (var i=1; i<memNum.numLen; i++)
 		  tmp += Math.floor(Math.random() * 10); // [0..9]
 		memNum.num = tmp;
 		
@@ -28,12 +28,13 @@ angular.module('myApp')
 	
 	memNum.showResult = function () {
 		if (memNum.inputNum == memNum.num) {
-		  memNum.correctAnswers++;
-		  memNum.stage = 'showResultCorrect';
+			memNum.numLen++;
+		    memNum.correctAnswers++;
+		    memNum.stage = 'showResultCorrect';
 	    }
 		else {
-		  memNum.wrongAnswers++;
-		  memNum.stage = 'showResultWrong';
+		    memNum.wrongAnswers++;
+		    memNum.stage = 'showResultWrong';
 	    }
 	}
 	

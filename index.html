@@ -9,9 +9,6 @@
   <body>
     <h2>Numbers Memory Game</h2>
     <div ng-controller="MemNumController as memNum">
-		<label>Number:</label> 
-		<div ng-show="memNum.showNum">{{memNum.numText}}</div>
-		<button ng-click="memNum.endGame()" class="btn-primary">End game</button>
             
         <div class="animate-switch-container" ng-switch on="memNum.stage">
 		    <div class="animate-switch" ng-switch-when="intro">
@@ -48,8 +45,10 @@
                 <label>Wrong answers:</label>{{memNum.wrongAnswers}}
             </div>
 		    <div class="animate-switch" ng-switch-default>Error: showing default....</div>
-		</div>
+		  
         </div>
+        
+		<button ng-click="memNum.endGame()" class="btn-primary">End game</button>
     </div>
   </body>
 </html>
