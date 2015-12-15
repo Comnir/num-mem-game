@@ -4,12 +4,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
     <script src="app.js"></script>
     <script src="memNum.js"></script>
-    <link rel="stylesheet" href="todo.css">
+    <link rel="stylesheet" type="text/css" href="memNum.css">
   </head>
   <body>
+      
+    
     <h2>Numbers Memory Game</h2>
-    <div ng-controller="MemNumController as memNum">
-            
+    <div id="mainFrame" ng-controller="MemNumController as memNum">
         <div class="animate-switch-container" ng-switch on="memNum.stage">
 		    <div class="animate-switch" ng-switch-when="intro">
                 The aim of this game is to test your number memorization capabilities.<br/>

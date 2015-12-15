@@ -48,6 +48,10 @@ angular.module('myApp')
 		cancelCountdown();
 	});
 	
+	$scope.isEqual = function (a, b) {
+		return (a == b)
+	}
+	
 	cancelCountdown = function() {
 		if (angular.isDefined(countdown)) {
             $interval.cancel(countdown);
