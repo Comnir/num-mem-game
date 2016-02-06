@@ -34,10 +34,14 @@
                 <button ng-click="memNum.selectNextNum()" class="btn-primary">Continue</button>
             </div>
 		    <div class="animate-switch" ng-switch-when="showResultWrong">
-                Wrong...<br/>
-                Displayed number: {{memNum.num}}<br/>
-                Your input: {{memNum.inputNum}}
-                <br/>
+                <span ng-repeat="n in memNum.inputNum track by $index;">
+                    <span ng-switch on="isEqual(n, memNum.num[$index])">
+                        <span ng-switch-when="true">{{n}}</span>
+                        <span ng-switch-when="false">
+                            <span class="answer-wrong">{{n}}</span>{{memNum.num[$index]}}
+                        </span>
+                    </span>
+                </span>
                 <button ng-click="memNum.selectNextNum()" class="btn-primary">Continue</button>
             </div>
 		    <div class="animate-switch" ng-switch-when="summary">
